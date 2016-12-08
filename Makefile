@@ -45,8 +45,7 @@ _EOF_
 #Copy scripts from project root into the new build directory that were not covered by npm run build
 cp ./Dockerfile ./build/
 cp ./package.json ./build/
-cp ./run.js ./build/
-cp ./noderun ./build/
+cp ./noderun.sh ./build/
 
 #Move into build
 cd build
