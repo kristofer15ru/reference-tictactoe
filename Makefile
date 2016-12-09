@@ -70,3 +70,4 @@ if [[ $rc != 0 ]] ; then
 fi
 
 echo "Done"
+exit 0

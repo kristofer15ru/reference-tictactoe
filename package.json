@@ -1,5 +1,6 @@
 {
-  "name": "an-outlandish-mean-app",
+  "name": "tictactac",
+  "author": "Kristofer Andersen",
   "version": "1.0.0",
   "description": "Base for a simple nodejs server",
   "private": true,
