@@ -5,3 +5,5 @@
 /.idea/
 /ec2_instance
 todo.md
+*.log
+npm-debug.log*
