@@ -1,46 +1,64 @@
 #Test examples
 
-##Placing moves
+##Create game command
+###Create a game
+- **Given**:
+- **When**: createGame
+- **Then**: GameCreated
+
+##Join game command
+
+###Join an open game
+- **Given**: GameCreated
+- **When**: joinGame
+- **Then**: GameJoined
+
+###Join a full game
+- **Given**: GameCreated, GameJoined
+- **When**: joinGame
+- **Then**: FullGameJoinAttmpted
+
+##Place move command
 
 ###Place legal move X
 - **Given**: gameCreated
 - **When**: placeMove(0,0,'X')
-- **Then**: movePlaced(0,0,'X')
+- **Then**: MovePlaced(0,0,'X')
 
 ###Place legal move O
-- **Given**: gameCreated, gameJoined
+- **Given**: GameCreated, GameJoined
 - **When**: placeMove(0,1,'O')
 - **Then**: movePlaced(0,0,'O')
 
 ###Place illegal move X
-- **Given**: gameCreated, movePlaced(0,1,'O')
+- **Given**: GameCreated, MovePlaced(0,1,'O')
 - **When**: placeMove(0,1,'X')
-- **Then**: illegalMoveAttempted
+- **Then**: IllegalMoveAttempted
 
 ###Place illegal move O
-- **Given**: gameCreated, gameJoined, movePlaced(0,0,'X')
+- **Given**: GameCreated, GameJoined, MovePlaced(0,0,'X')
 - **When**: placeMove(0,0,'O')
-- **Then**: illegalMoveAttempted
+- **Then**: IllegalMoveAttempted
 
 ###Illegally replace own move
-- **Given**: gameCreated, gameJoined, movePlaced(0,0,'X')
+- **Given**: GameCreated, GameJoined, MovePlaced(0,0,'X')
 - **When**: placeMove(0,0,'X')
-- **Then**: illegalMoveAttempted
+- **Then**: IllegalMoveAttempted
 
 ###Place move out of bounds
-- **Given**: gameCreated
+- **Given**: GameCreated
 - **When**: placeMove(3,3,'X')
-- **Then**: illegalMoveAttempted
+- **Then**: IllegalMoveAttempted
 
 ###Making a move when it's not the players turn
-- **Given**: gameCreated, gameJoined, turn('X')
+- **Given**: GameCreated, GameJoined, Move('X')
 - **When**: placeMove(0,0,'O')
-- **Then**: illegalMoveAttemped
+- **Then**: NotYourMove
 
 ##Winning the game
 
 ###Horizontal win
-- **Given**: gameCreated, gameJoined
+- **Given**: GameCreated, GameJoined
 - **When**: Board:
 
 | 0 | 1 | 2 |
@@ -49,10 +67,10 @@
 |'O'|'O'|'-'|
 |'-'|'-'|'-'|
             
-- **Then**: gameWon('X')
+- **Then**: GameWon('X')
 
 ###Vertical win
-- **Given**: gameCreated, gameJoined
+- **Given**: GameCreated, GameJoined
 - **When**: Board:
 
 | 0 | 1 | 2 |
@@ -61,10 +79,10 @@
 |'X'|'O'|'-'|
 |'-'|'O'|'-'|
 
-**Then**: gameWon('O')
+**Then**: GameWon('O')
 
 ###Diagonal win #1
-- **Given**: gameCreated, gameJoined
+- **Given**: GameCreated, GameJoined
 - **When**: Board:
 
 | 0 | 1 | 2 |
@@ -73,10 +91,10 @@
 |'O'|'X'|'-'|
 |'-'|'O'|'X'|
 
-**Then**: gameWon('X')
+**Then**: GameWon('X')
 
 ###Diagonal win #2
-- **Given**: gameCreated, gameJoined
+- **Given**: GameCreated, GameJoined
 - **When**: Board:
 
 | 0 | 1 | 2 |
@@ -85,12 +103,12 @@
 |'X'|'O'|'-'|
 |'O'|'-'|'X'|
 
-**Then**: gameWon('O')
+**Then**: GameWon('O')
 
-##Game ends in a draw
+##All tiles occupied
 
 ###All tiles occupied without a win
-- **Given**: gameCreated, gameJoined
+- **Given**: GameCreated, GameJoined
 - **When**: Board:
 
 | 0 | 1 | 2 |
@@ -99,4 +117,16 @@
 |'X'|'O'|'O'|
 |'O'|'X'|'X'|
 
-- **Then**: gameDraw
+- **Then**: GameDraw
+
+###All tiles occupied with a win
+- **Given**: GameCreated, GameJoined
+- **When**: Board:
+
+| 0 | 1 | 2 |
+| --- |:---:| --- |
+|'X'|'O'|'O'|
+|'X'|'X'|'O'|
+|'O'|'X'|'X'|
+
+-- **Then**: GameWon('X')
