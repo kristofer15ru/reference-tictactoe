@@ -32,6 +32,11 @@
 - **When**: placeMove(3,3,'X')
 - **Then**: illegalMoveAttempted
 
+###Making a move when it's not the players turn
+- **Given**: gameCreated, gameJoined, turn('X')
+- **When**: placeMove(0,0,'O')
+- **Then**: illegalMoveAttemped
+
 ##Winning the game
 
 ###Horizontal win
