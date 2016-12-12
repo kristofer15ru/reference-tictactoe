@@ -1,7 +1,8 @@
 #Remove old node_modules
 rm -rf node_modules
 rm -rf ./client/node_modules
-#Remove everything else
+
+#Make sure no changes to tracked files survive
 git clean -dfx
 git stash
 
