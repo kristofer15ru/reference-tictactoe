@@ -1,5 +1,5 @@
 {
-  "name": "tictactac",
+  "name": "tictactoe",
   "author": "Kristofer Andersen",
   "version": "1.0.0",
   "description": "Base for a simple nodejs server",
