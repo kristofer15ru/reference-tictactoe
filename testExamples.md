@@ -92,9 +92,11 @@
 ###All tiles occupied without a win
 - **Given**: gameCreated, gameJoined
 - **When**: Board:
+
 | 0 | 1 | 2 |
 | --- |:---:| --- |
 |'X'|'O'|'X'|
 |'X'|'O'|'O'|
 |'O'|'X'|'X'|
+
 - **Then**: gameDraw
