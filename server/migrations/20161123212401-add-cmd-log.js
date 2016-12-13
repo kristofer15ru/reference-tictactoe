@@ -18,8 +18,7 @@ exports.up = function(db,callback) {
   db.createTable('commandlog', {
     timestamp:{ type:'datetime'},
     id: { type: 'string', primaryKey: true },
-    json: 'string',
-    aggregate_id: 'string'
+    json: 'string'
   }, callback);};
 
 exports.down = function(db) {
