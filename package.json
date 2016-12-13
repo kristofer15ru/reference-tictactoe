@@ -1,6 +1,6 @@
 {
   "name": "tictactoe",
-  "author": "Kristofer Andersen",
+  "author": "Kristofer Andersen <kristofer15@ru.is>",
   "version": "1.0.0",
   "description": "Base for a simple nodejs server",
   "private": true,
