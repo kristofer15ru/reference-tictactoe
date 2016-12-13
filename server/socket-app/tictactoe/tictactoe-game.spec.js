@@ -171,18 +171,8 @@ describe('Place move command', function () {
         });
     });
 
-    it('should emit MovePlaced event on first move', function () {
-        given = [
-          {
-            type: "GameJoined",
-            user: {
-              userName: "Gummi"
-            },
-            name: "TheFirstGame",
-            timeStamp: "2014-12-02T11:29:29",
-            side:'O'
-          }
-        ];
+    it('should emit MovePlaced event on first move for X', function () {
+        given = [];
         when =
         {
           type: "PlaceMove",
@@ -208,7 +198,7 @@ describe('Place move command', function () {
           }
         ];
     });
-    it('should emit IllegalMoveAttempt event on a repeated move', function () {
+    it('should emit IllegalMove when square is already occupied by X', function () {
       given = [
         {
           type: "MovePlaced",
@@ -242,6 +232,42 @@ describe('Place move command', function () {
           timeStamp: "2014-12-02T11:39:29",
           location: "0",
           side: 'O'
+          }
+      ];
+    })
+    it('Should emit NotYourMove if attempting to make move out of turn', function () {
+      given = [
+        {
+          type: "MovePlaced",
+          user: {
+            userName: "TheGuy"
+          },
+          name: "TheFirstGame",
+          timeStamp: "2014-12-02T11:40:29",
+          location: '0',
+          side: 'X'
+        }
+      ];
+      when =
+      {
+        type: "PlaceMove",
+        user: {
+          userName: "TheGuy"
+        },
+        name: "TheFirstGame",
+        timeStamp: "2014-12-02T11:40:30",
+        location: '0',
+        side: 'X'
+      };
+      then = [
+        {
+          type: "NotYourMove",
+          user: {
+            userName: "TheGuy",
+          },
+          name: "TheFirstGame",
+          timeStamp: "2014-12-02T11:40:30",
+          side: 'X'
           }
       ];
     })
