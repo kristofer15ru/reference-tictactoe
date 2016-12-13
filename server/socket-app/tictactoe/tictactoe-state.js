@@ -4,27 +4,36 @@ module.exports = function (injected) {
 
     return function (history) {
 
-	var gamefull = false;
+	      var gamefull = false;
+        var grid = new Array(9);
 
         function processEvent(event) {
-            if(event.type=="GameJoined") {
-		gamefull = true;
-	    }
-	}
+          if(event.type=="GameJoined") {
+            gamefull = true;
+          }
+          if(event.type=="MovePlaced") {
+            grid[event.location] = event.side;
+          }
+	      }
 
         function processEvents(history) {
             _.each(history, processEvent);
         }
 
-	function gameFull() {
-	    return gamefull;
-	}
+      	function gameFull() {
+      	    return gamefull;
+      	}
+
+        function gridOccupied(location) {
+          return (grid[location] != null);
+        }
 
         processEvents(history);
 
         return {
-	    gameFull:gameFull,
-            processEvents: processEvents
+          gridOccupied:gridOccupied,
+          gameFull:gameFull,
+          processEvents: processEvents
         }
     };
 };

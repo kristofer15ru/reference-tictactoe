@@ -45,11 +45,31 @@ module.exports = function(injected){
                     "PlaceMove": function(cmd){
 
                         // Check here for conditions which prevent command from altering state
+                        if(gameState.gridOccupied(cmd.location)) {
+                          eventHandler( [{
+                            gameId: cmd.gameId,
+                            type: "IllegalMoveAttempt",
+                            user: cmd.user,
+                            name: cmd.name,
+                            timeStamp: cmd.timeStamp,
+                            location: cmd.location,
+                            side: cmd.side
+                          }]);
+                          return;
+                      }
 
-                        gameState.processEvents(events);
+                      eventHandler([{
+                        gameId: cmd.gameId,
+                        type: "MovePlaced",
+                        user: cmd.user,
+                        name: cmd.name,
+                        timeStamp: cmd.timeStamp,
+                        location: cmd.location,
+                        side: cmd.side
+                      }]);
+
 
                         // Check here for conditions which may warrant additional events to be emitted.
-                        eventHandler(events);
                     }
                 };
 
@@ -61,4 +81,3 @@ module.exports = function(injected){
         }
     }
 };
-

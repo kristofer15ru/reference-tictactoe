@@ -28,7 +28,6 @@ var joinEvent = {
 
 describe('create game command', function() {
 
-
     var given, when, then;
 
     beforeEach(function(){
@@ -75,7 +74,6 @@ describe('create game command', function() {
 
 describe('join game command', function () {
 
-
     var given, when, then;
 
     beforeEach(function () {
@@ -91,7 +89,7 @@ describe('join game command', function () {
     });
 
 
-    it('should emit game joined event...', function () {
+    it('should emit game joined event', function () {
 
         given = [{
             type: "GameCreated",
@@ -122,43 +120,129 @@ describe('join game command', function () {
                 side:'O'
             }
         ];
-
     });
 
     it('should emit FullGameJoinAttempted event when game full', function () {
 
-        given = [{
-	    type: "GameJoined",
-                user: {
-                    userName: "Gummi"
-                },
-                name: "TheFirstGame",
-                timeStamp: "2014-12-02T11:29:29",
-                side:'O'
-	}
-	];
-	when =
-        {
-            type: "JoinGame",
-            user: {
-                userName: "Gummi"
-            },
-            name: "TheFirstGame",
-            timeStamp: "2014-12-02T11:30:29"
-        };
-	then = [
-        {
-            type: "FullGameJoinAttempted",
-            user: {
-                userName: "Gummi"
-            },
-            name: "TheFirstGame",
-            timeStamp: "2014-12-02T11:30:29"
-            }
-        ];
-
-
+      given = [{
+              type: "GameJoined",
+              user: {
+                  userName: "Gummi"
+              },
+              name: "TheFirstGame",
+              timeStamp: "2014-12-02T11:29:29",
+              side:'O'
+          }
+      ];
+      when =
+      {
+          type: "JoinGame",
+          user: {
+              userName: "Gummi"
+          },
+          name: "TheFirstGame",
+          timeStamp: "2014-12-02T11:30:29"
+      };
+      then = [
+          {
+              type: "FullGameJoinAttempted",
+              user: {
+                  userName: "Gummi"
+              },
+              name: "TheFirstGame",
+              timeStamp: "2014-12-02T11:30:29"
+          }
+      ];
     });
 });
+describe('Place move command', function () {
 
+    var given, when, then;
 
+    beforeEach(function () {
+        given = undefined;
+        when = undefined;
+        then = undefined;
+    });
+
+    afterEach(function () {
+        tictactoe(given).executeCommand(when, function (actualEvents) {
+            should(JSON.stringify(actualEvents)).be.exactly(JSON.stringify(then));
+        });
+    });
+
+    it('should emit MovePlaced event on first move', function () {
+        given = [
+          {
+            type: "GameJoined",
+            user: {
+              userName: "Gummi"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:29:29",
+            side:'O'
+          }
+        ];
+        when =
+        {
+          type: "PlaceMove",
+          user: {
+            userName: "TheGuy"
+          },
+          name: "TheFirstGame",
+          timeStamp: "2014-12-02T11:35:29",
+          location: "0",
+          side: 'X'
+        };
+        then =
+        [
+          {
+            type: "MovePlaced",
+            user: {
+              userName: "TheGuy"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:35:29",
+            location: "0",
+            side: 'X'
+          }
+        ];
+    });
+    it('should emit IllegalMoveAttempt event on a repeated move', function () {
+      given = [
+        {
+          type: "MovePlaced",
+          user: {
+            userName: "TheGuy"
+          },
+          name: "TheFirstGame",
+          timeStamp: "2014-12-02T11:35:29",
+          location: "0",
+          side: 'X'
+        }
+      ];
+      when =
+      {
+        type: "PlaceMove",
+        user: {
+          userName: "Gulli"
+        },
+        name: "TheFirstGame",
+        timeStamp: "2014-12-02T11:39:29",
+        location: "0",
+        side: 'O'
+      };
+      then = [
+        {
+          type: "IllegalMoveAttempt",
+          user: {
+            userName: "Gulli",
+          },
+          name: "TheFirstGame",
+          timeStamp: "2014-12-02T11:39:29",
+          location: "0",
+          side: 'O'
+          }
+      ];
+    })
+});
