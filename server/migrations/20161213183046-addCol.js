@@ -16,11 +16,11 @@ exports.setup = function(options, seedLink) {
 
 exports.up = function(db, callback) {
   db.addColumn('commandlog',
-    'aggregate-id',
+    'aggregate_id',
     'string',
     callback);
   db.addColumn('eventlog',
-    'aggregate-id',
+    'aggregate_id',
     'string',
     callback);
 };
