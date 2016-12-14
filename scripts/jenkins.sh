@@ -16,5 +16,5 @@ cd client
 npm install
 cd ..
 #Build
-./Makefile
+scripts/Makefile
 
