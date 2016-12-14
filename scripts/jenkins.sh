@@ -14,7 +14,7 @@ git stash
 npm install
 cd client
 npm install
-cd ..
+cd ../scripts
 #Build
-scripts/Makefile
+./Makefile
 
