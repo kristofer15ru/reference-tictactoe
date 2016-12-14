@@ -1,5 +1,5 @@
 #!/bin/bash
-
+cd ..
 #Get git variables
 export STUDENTNAME='kristofer15'
 if [ -z "$GIT_COMMIT" ]; then
