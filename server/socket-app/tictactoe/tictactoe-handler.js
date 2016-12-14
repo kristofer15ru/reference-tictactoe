@@ -83,7 +83,7 @@ module.exports = function(injected){
                         }
                       ];
 
-                      gameState.processEvents(events);
+                      gameState.processEvents(events)
 
                       if(gameState.winningMove(cmd)) {
                         events.push({
@@ -95,7 +95,6 @@ module.exports = function(injected){
                           side: cmd.side
                         });
                       }
-
                       eventHandler(events)
                     }
                 };

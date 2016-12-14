@@ -69,12 +69,23 @@ module.exports = function (injected) {
           if(won)
             return won;
 
+          //No horizontal win. Reset i
+          i = cmd.location
           //Jump to the highest row
           while(i > 2) {
             i -= 3;
           }
           //Check if the current col has a vertical winning condition
           won = (grid[i] == s && grid[i+3] == s && grid[i+6] == s);
+          if(won)
+            return won;
+
+          //No vertical win
+          //Check for the two diagonal wins if the placed symbol exists in the center
+          if(grid[4] == s) {
+            won = (grid[0] == s && grid[8]) == s || (grid[2] == s && grid[6] == s)
+          }
+
           return won;
         }
 
