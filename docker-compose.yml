@@ -4,7 +4,7 @@ services:
   #Find latest tictactoe image and run it
   server:
     #Using image known as tictactoe by kristofer15
-    image: kristofer15/tictactoe
+    image: kristofer15/tictactoe:${GIT_COMMIT}
     ports:
       #Listen on the specified ports. Must include the one specified in run.js
       ['80:80']

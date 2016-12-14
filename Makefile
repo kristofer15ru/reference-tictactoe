@@ -25,8 +25,8 @@ fi
 mkdir -p ./build/public
 
 #Write build information
-cat > ./build/githash.txt <<_EOF_
-$GIT_COMMIT
+cat > ./build/.env <<_EOF_
+GIT_COMMIT=$GIT_COMMIT
 _EOF_
 
 cat > ./build/public/version.html << _EOF_
@@ -52,7 +52,7 @@ cd build
 echo Building docker image
 
 #Create a new docker image
-docker build -t $STUDENTNAME/tictactoe .
+docker build -t $STUDENTNAME/tictactoe:$GIT_COMMIT .
 
 rc=$?
 if [[ $rc != 0 ]] ; then
@@ -62,7 +62,7 @@ fi
 
 #Push any changes to the image to dockerhub
 echo pushing new docker image
-docker push $STUDENTNAME/tictactoe
+docker push $STUDENTNAME/tictactoe:$GIT_COMMIT
 rc=$?
 if [[ $rc != 0 ]] ; then
     echo "Docker push failed " $rc
