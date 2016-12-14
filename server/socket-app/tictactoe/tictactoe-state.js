@@ -47,6 +47,10 @@ module.exports = function (injected) {
           return (grid[location] != null);
         }
 
+        function outOfBounds(location) {
+          return (location < 0 || location > 8)
+        }
+
         function notYourMove(side) {
           return (side != move)
         }
@@ -100,6 +104,7 @@ module.exports = function (injected) {
           noMovesLeft:noMovesLeft,
           winningMove:winningMove,
           notYourMove:notYourMove,
+          outOfBounds:outOfBounds,
           gridOccupied:gridOccupied,
           gameFull:gameFull,
           processEvents: processEvents

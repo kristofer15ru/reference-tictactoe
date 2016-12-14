@@ -235,6 +235,32 @@ describe('Place move command', function () {
           }
       ];
     })
+    it('Should emit IllegalMove when move attempt is out of bounds', function () {
+      given = [];
+      when =
+      {
+        type: "PlaceMove",
+        user: {
+          userName: "Gulli"
+        },
+        name: "TheFirstGame",
+        timeStamp: "2014-12-02T11:39:29",
+        location: '9',
+        side: 'X'
+      };
+      then = [
+        {
+          type: "IllegalMoveAttempt",
+          user: {
+            userName: "Gulli",
+          },
+          name: "TheFirstGame",
+          timeStamp: "2014-12-02T11:39:29",
+          location: '9',
+          side: 'X'
+        }
+      ];
+    })
     it('Should emit NotYourMove if attempting to make move out of turn', function () {
       given = [
         {

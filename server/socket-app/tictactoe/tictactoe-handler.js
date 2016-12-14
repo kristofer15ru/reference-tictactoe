@@ -54,7 +54,19 @@ module.exports = function(injected){
                           timeStamp: cmd.timeStamp,
                           side: cmd.side
                         }])
-                        return;
+                        return
+                      }
+                      if(gameState.outOfBounds(cmd.location)) {
+                        eventHandler( [{
+                          gameId: cmd.gameId,
+                          type: "IllegalMoveAttempt",
+                          user: cmd.user,
+                          name: cmd.name,
+                          timeStamp: cmd.timeStamp,
+                          location: cmd.location,
+                          side: cmd.side
+                        }])
+                        return
                       }
                       if(gameState.gridOccupied(cmd.location)) {
                         eventHandler( [{
@@ -66,7 +78,7 @@ module.exports = function(injected){
                           location: cmd.location,
                           side: cmd.side
                         }]);
-                        return;
+                        return
                       }
 
                       //Move is legal
