@@ -40,11 +40,11 @@ module.exports = function (injected) {
         }
 
       	function gameFull() {
-          return gamefull;
+          return gamefull
       	}
 
         function gridOccupied(location) {
-          return (grid[location] != null);
+          return (grid[location] != null)
         }
 
         function outOfBounds(location) {

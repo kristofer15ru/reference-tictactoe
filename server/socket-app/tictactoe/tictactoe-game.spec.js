@@ -297,6 +297,32 @@ describe('Place move command', function () {
           }
       ];
     })
+    it('Should emit NotYourMove if O tries to start', function () {
+      given = [];
+      when =
+      {
+        type: "PlaceMove",
+        user: {
+          userName: "Gulli"
+        },
+        name: "TheFirstGame",
+        timeStamp: "2014-12-02T11:40:30",
+        location: '0',
+        side: 'O'
+      };
+      then = [
+        {
+          type: "NotYourMove",
+          user: {
+            userName: "Gulli",
+          },
+          name: "TheFirstGame",
+          timeStamp: "2014-12-02T11:40:30",
+          side: 'O'
+          }
+      ];
+    })
+
 
     it('Should emit GameWon on a horizontal win', function () {
       given = [
