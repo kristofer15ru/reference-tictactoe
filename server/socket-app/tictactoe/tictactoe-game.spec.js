@@ -171,7 +171,7 @@ describe('Place move command', function () {
         });
     });
 
-    it('should emit MovePlaced event on first move for X', function () {
+    it('should emit MovePlaced event on the first move', function () {
         given = [];
         when =
         {
@@ -198,7 +198,7 @@ describe('Place move command', function () {
           }
         ];
     });
-    it('should emit IllegalMove when square is already occupied by X', function () {
+    it('should emit IllegalMove when square is already occupied', function () {
       given = [
         {
           type: "MovePlaced",
@@ -322,7 +322,6 @@ describe('Place move command', function () {
           }
       ];
     })
-
 
     it('Should emit GameWon on a horizontal win', function () {
       given = [
