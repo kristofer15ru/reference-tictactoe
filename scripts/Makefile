@@ -1,8 +1,5 @@
 #!/bin/bash
 
-#Move to root
-cd ..
-
 #Get git variables
 export STUDENTNAME='kristofer15'
 if [ -z "$GIT_COMMIT" ]; then
@@ -25,14 +22,14 @@ if [[ $rc != 0 ]] ; then
 fi
 
 #Create a directory for build information
-mkdir -p ../build/public
+mkdir -p ./build/public
 
 #Write build information
-cat > ../build/.env <<_EOF_
+cat > ./build/.env <<_EOF_
 GIT_COMMIT=$GIT_COMMIT
 _EOF_
 
-cat > ../build/public/version.html << _EOF_
+cat > ./build/public/version.html << _EOF_
 <!doctype html>
 <head>
    <title>App version information</title>
