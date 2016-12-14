@@ -1,4 +1,3 @@
-cd ..
 #Remove old containers if there are any
 docker rm -f $(docker ps -qa)
 #Remove old images
