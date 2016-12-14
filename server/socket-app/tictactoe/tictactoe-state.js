@@ -11,10 +11,11 @@ module.exports = function (injected) {
 
     return function (history) {
 
-	      var gamefull = false;
-        var grid = new Array(9);
-        var move = 'X';
-        var won = false;
+	      var gamefull = false
+        var grid = new Array(9)
+        var moveCount = 0
+        var move = 'X'
+        var won = false
 
         function processEvent(event) {
           if(event.type=="GameJoined") {
@@ -23,7 +24,7 @@ module.exports = function (injected) {
           if(event.type=="MovePlaced" || event.type=="PlaceMove") {
             //Place the players symbol in the selected location
             grid[event.location] = event.side;
-
+            moveCount++;
             //Switch turns
             if(move == 'X') {
               move = 'O';
@@ -89,9 +90,14 @@ module.exports = function (injected) {
           return won;
         }
 
+        function noMovesLeft() {
+          return (moveCount == 9)
+        }
+
         processEvents(history);
 
         return {
+          noMovesLeft:noMovesLeft,
           winningMove:winningMove,
           notYourMove:notYourMove,
           gridOccupied:gridOccupied,

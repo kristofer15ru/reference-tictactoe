@@ -93,7 +93,15 @@ module.exports = function(injected){
                           name: cmd.name,
                           timeStamp: cmd.timeStamp,
                           side: cmd.side
-                        });
+                        })
+                      }
+                      else if(gameState.noMovesLeft()) {
+                        events.push({
+                          gameId: cmd.gameId,
+                          type: "GameDraw",
+                          name: cmd.name,
+                          timeStamp: cmd.timeStamp
+                        })
                       }
                       eventHandler(events)
                     }
