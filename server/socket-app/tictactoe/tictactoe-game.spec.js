@@ -272,7 +272,7 @@ describe('Place move command', function () {
       ];
     })
 
-    it('Should emit game won on a horizontal win', function () {
+    it('Should emit GameWon on a horizontal win', function () {
       given = [
         {
           type: "MovePlaced",
@@ -348,8 +348,7 @@ describe('Place move command', function () {
         }
       ];
     })
-
-    it('Should emit game won on a vertical win', function () {
+    it('Should emit GameWon on a vertical win', function () {
       given = [
         {
           type: "MovePlaced",
@@ -435,7 +434,7 @@ describe('Place move command', function () {
           }
       ];
     })
-    it('Should emit game won on a diagonal win from 0 to 8', function () {
+    it('Should emit GameWon on a diagonal win from 0 to 8', function () {
       given = [
         {
           type: "MovePlaced",
@@ -511,7 +510,7 @@ describe('Place move command', function () {
           }
       ];
     })
-    it('Should emit game won on a diagonal win from 2 to 6', function () {
+    it('Should emit GameWon on a diagonal win from 2 to 6', function () {
       given = [
         {
           type: "MovePlaced",
