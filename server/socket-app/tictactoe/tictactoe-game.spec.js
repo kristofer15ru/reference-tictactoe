@@ -271,6 +271,7 @@ describe('Place move command', function () {
           }
       ];
     })
+
     it('Should emit game won an on horizontal win', function () {
       given = [
         {
@@ -327,13 +328,110 @@ describe('Place move command', function () {
       };
       then = [
         {
+          type: "MovePlaced",
+          user: {
+            userName: "TheGuy"
+          },
+          name: "TheFirstGame",
+          timeStamp: "2014-12-02T11:41:32",
+          location: '2',
+          side: 'X'
+        },
+        {
           type: "GameWon",
           user: {
             userName: "TheGuy",
           },
           name: "TheFirstGame",
-          timeStamp: "2014-12-02T11:41:33",
+          timeStamp: "2014-12-02T11:41:32",
           side: 'X'
+        }
+      ];
+    })
+
+    it('Should emit game won an on vertical win', function () {
+      given = [
+        {
+          type: "MovePlaced",
+          user: {
+            userName: "TheGuy"
+          },
+          name: "TheFirstGame",
+          timeStamp: "2014-12-02T11:40:29",
+          location: '1',
+          side: 'X'
+        },
+        {
+          type: "MovePlaced",
+          user: {
+            userName: "Gulli"
+          },
+          name: "TheFirstGame",
+          timeStamp: "2014-12-02T11:41:29",
+          location: '0',
+          side: 'O'
+        },
+        {
+          type: "MovePlaced",
+          user: {
+            userName: "TheGuy"
+          },
+          name: "TheFirstGame",
+          timeStamp: "2014-12-02T11:41:30",
+          location: '4',
+          side: 'X'
+        },
+        {
+          type:"MovePlaced",
+          user: {
+            userName: "Gulli"
+          },
+          name: "TheFirstGame",
+          timeStamp: "2014-12-02T11:41:31",
+          location: '3',
+          side: 'O'
+        },
+        {
+          type: "MovePlaced",
+          user: {
+            userName: "TheGuy"
+          },
+          name: "TheFirstGame",
+          timeStamp: "2014-12-02T11:41:32",
+          location: '8',
+          side: 'X'
+        }
+      ];
+      when =
+      {
+        type: "PlaceMove",
+        user: {
+          userName: "Gulli"
+        },
+        name: "TheFirstGame",
+        timeStamp: "2014-12-02T11:41:33",
+        location: '6',
+        side: 'O'
+      };
+      then = [
+        {
+          type: "MovePlaced",
+          user: {
+            userName: "Gulli"
+          },
+          name: "TheFirstGame",
+          timeStamp: "2014-12-02T11:41:33",
+          location: '6',
+          side: 'O'
+        },
+        {
+          type: "GameWon",
+          user: {
+            userName: "Gulli",
+          },
+          name: "TheFirstGame",
+          timeStamp: "2014-12-02T11:41:33",
+          side: 'O'
           }
       ];
     })

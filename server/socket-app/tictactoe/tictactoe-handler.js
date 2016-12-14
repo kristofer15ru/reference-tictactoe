@@ -85,8 +85,8 @@ module.exports = function(injected){
 
                       gameState.processEvents(events);
 
-                      if(gameState.winningMove(cmd.location)) {
-                        eventHandler({
+                      if(gameState.winningMove(cmd)) {
+                        events.push({
                           gameId: cmd.gameId,
                           type: "GameWon",
                           user: cmd.user,
@@ -94,8 +94,8 @@ module.exports = function(injected){
                           timeStamp: cmd.timeStamp,
                           side: cmd.side
                         });
-                        return;
                       }
+                      eventHandler(events)
                     }
                 };
 

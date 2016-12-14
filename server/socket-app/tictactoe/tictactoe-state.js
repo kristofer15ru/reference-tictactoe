@@ -51,14 +51,31 @@ module.exports = function (injected) {
         }
 
         //Search for winning conditions around the last move
-        function winningMove(i) {
+        function winningMove(cmd) {
+          var i = cmd.location;
+          //Check against the symbol that is not playing, since the move switched them.
+          var s;
+          if(move == 'X')
+            s = 'O';
+          else if(move == 'O')
+            s = 'X';
+
           //Slide to the beginning of the row
           while(i % 3 !== 0) {
             i--;
           }
-
           //Check if the current row has a horizontal winning condition
-          won = (grid[i] == move && grid[i+1] == move && grid[i+2] == move);
+          won = (grid[i] == s && grid[i+1] == s && grid[i+2] == s);
+          if(won)
+            return won;
+
+          //Jump to the highest row
+          while(i > 2) {
+            i -= 3;
+          }
+          //Check if the current col has a vertical winning condition
+          won = (grid[i] == s && grid[i+3] == s && grid[i+6] == s);
+          return won;
         }
 
         processEvents(history);
