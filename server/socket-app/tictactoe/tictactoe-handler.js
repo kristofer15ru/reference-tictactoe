@@ -69,18 +69,33 @@ module.exports = function(injected){
                         return;
                       }
 
-                      eventHandler([{
-                        gameId: cmd.gameId,
-                        type: "MovePlaced",
-                        user: cmd.user,
-                        name: cmd.name,
-                        timeStamp: cmd.timeStamp,
-                        location: cmd.location,
-                        side: cmd.side
-                      }]);
+                      //Move is legal
 
+                      var events = [
+                        {
+                          gameId: cmd.gameId,
+                          type: "MovePlaced",
+                          user: cmd.user,
+                          name: cmd.name,
+                          timeStamp: cmd.timeStamp,
+                          location: cmd.location,
+                          side: cmd.side
+                        }
+                      ];
 
-                        // Check here for conditions which may warrant additional events to be emitted.
+                      gameState.processEvents(events);
+
+                      if(gameState.winningMove(cmd.location)) {
+                        eventHandler({
+                          gameId: cmd.gameId,
+                          type: "GameWon",
+                          user: cmd.user,
+                          name: cmd.name,
+                          timeStamp: cmd.timeStamp,
+                          side: cmd.side
+                        });
+                        return;
+                      }
                     }
                 };
 
