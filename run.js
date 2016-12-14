@@ -1,7 +1,7 @@
 module.exports = (function() {
     require('server/globals');
 
-    var port = process.env.PORT || 80;
+    var port = process.env.PORT || 8080;
     var env = process.env.NODE_ENV || 'development';
 
     console.log("Run env:", process.env);
