@@ -57,7 +57,7 @@ module.exports = function (injected) {
           var s;
           if(move == 'X')
             s = 'O';
-          else if(move == 'O')
+          else
             s = 'X';
 
           //Slide to the beginning of the row

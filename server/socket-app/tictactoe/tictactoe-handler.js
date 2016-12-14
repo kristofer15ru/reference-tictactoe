@@ -95,6 +95,7 @@ module.exports = function(injected){
                           side: cmd.side
                         });
                       }
+
                       eventHandler(events)
                     }
                 };

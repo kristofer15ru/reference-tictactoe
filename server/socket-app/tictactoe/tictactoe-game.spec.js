@@ -272,7 +272,7 @@ describe('Place move command', function () {
       ];
     })
 
-    it('Should emit game won an on horizontal win', function () {
+    it('Should emit game won on a horizontal win', function () {
       given = [
         {
           type: "MovePlaced",
@@ -349,7 +349,7 @@ describe('Place move command', function () {
       ];
     })
 
-    it('Should emit game won an on vertical win', function () {
+    it('Should emit game won on a vertical win', function () {
       given = [
         {
           type: "MovePlaced",
