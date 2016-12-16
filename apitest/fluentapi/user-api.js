@@ -9,7 +9,8 @@ module.exports=function(injected){
     function userAPI(){
         var waitingFor=[];
         var commandId=0;
-
+        var gameId=0;
+        var gameSymbol='';
         var routingContext = RoutingContext(inject({
             io,
             env:"test"
@@ -54,6 +55,58 @@ module.exports=function(injected){
                 return me;
 
             },
+            expectGameCreated:()=>{
+              waitingFor.push("expectGameCreated");
+              routingContext.eventRouter.on('GameCreated', function(){
+                waitingFor.pop();
+              });
+              return me;
+            },
+            createGame:()=>{
+              var cmdId = generateUUID();
+              me.gameId = generateUUID();
+              me.gameSymbol = 'X';
+              routingContext.commandRouter.routeMessage({commandId:cmdId, gameId:me.gameId, type:"CreateGame", timeStamp: new Date().getTime()});
+              return me;
+            },
+            expectGameJoined:()=>{
+              waitingFor.push("expectGameJoined");
+              routingContext.eventRouter.on('GameJoined', function(){
+                waitingFor.pop();
+              });
+              return me;
+            },
+            joinGame:(gameId)=>{
+              var cmdId = generateUUID();
+              me.gameId = gameId;
+              me.gameSymbol = 'O';
+              routingContext.commandRouter.routeMessage({commandId:cmdId, gameId:me.gameId, type:"JoinGame", timeStamp: new Date().getTime()});
+              return me;
+            },
+            getGame:()=>{
+              return me;
+            },
+            expectMoveMade:()=>{
+              waitingFor.push("expectMoveMade");
+              routingContext.eventRouter.on('MovePlaced', function(){
+                waitingFor.pop();
+              });
+              return me;
+            },
+            placeMove:(x, y)=>{
+              var cmdId = generateUUID();
+              var location = x + 3*y;
+              routingContext.commandRouter.routeMessage({commandId:cmdId, gameId:me.gameId, type:"PlaceMove", location:location, side:me.gameSymbol, timeStamp: new Date().getTime()});
+              return me;
+            },
+            expectGameWon:()=>{
+              waitingFor.push("expectGameWon");
+              routingContext.eventRouter.on('GameWon', function(){
+                waitingFor.pop();
+              });
+              return me;
+            },
+
             then:(whenDoneWaiting)=>{
                 function waitLonger(){
                     if(waitingFor.length>0){
