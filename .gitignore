@@ -4,6 +4,7 @@
 /build
 /.idea/
 /ec2_instance
+/artifacts
 todo.md
 *.log
 npm-debug.log*
