@@ -1,3 +1,5 @@
+#Clear possible changes and reinstall the application
+
 #Remove old containers if there are any
 docker rm -f $(docker ps -qa)
 #Remove old images
@@ -10,11 +12,4 @@ rm -rf ./client/node_modules
 git clean -dfx
 git stash
 
-#install npm again
-npm install
-cd client
-npm install
-cd ..
-#Build
 ./Makefile
-
