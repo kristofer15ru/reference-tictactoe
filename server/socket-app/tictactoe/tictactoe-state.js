@@ -21,7 +21,7 @@ module.exports = function (injected) {
           if(event.type=="GameJoined") {
             gamefull = true;
           }
-          if(event.type=="MovePlaced" || event.type=="PlaceMove") {
+          if(event.type=="MovePlaced") {
             //Place the players symbol in the selected location
             grid[event.location] = event.side;
             moveCount++;
