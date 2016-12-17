@@ -13,33 +13,52 @@ const testAPI = TestAPI(inject({
     RoutingContext
 }));
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 20000;
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
 
 describe('User Tictactoe load test', function(){
 
-  const count = 200;
-  const timelimit = 8000;
-  var userA, userB;
+  const count = 100;
+  const timelimit = 20000;
 
   beforeEach(function (done) {
       var testapi = testAPI();
       testapi.waitForCleanDatabase().cleanDatabase().then(()=> {
           testapi.disconnect();
-          userA = userAPI();
-          userB = userAPI();
           done();
       });
   });
 
-  it('should create and play ' + count + '  games withing '+ timelimit +'ms',function(done){
+  it('should create and play ' + count + '  games within '+ timelimit +'ms',function(done){
     var startMillis = new Date().getTime();
+    var users = Array(count);
     for(var i = 0; i < count; i++) {
-      afterEach(function () {
-          userA.disconnect();
-          userB.disconnect();
-      });
+      var userA, userB;
+      userA = userAPI();
+      userB = userAPI();
+      users.push(userA);
+      users.push(userB);
 
-      userA.expectGameCreated().createGame().then(()=> {
+      userA.createGame().then(()=> {
+            userB.joinGame(userA.getGame().gameId).then(function () {
+                userA.placeMove(0, 0).then(()=> {
+                    userB.placeMove(1, 0).then(()=> {
+                        userA.placeMove(1, 1).then(()=> {
+                            userB.placeMove(0, 2).then(()=> {
+                                userA.placeMove(2, 2)
+                            })
+                        })
+                    });
+                })
+            })
+      })
+    }
+
+    // Create users for the last test
+    var userA = userAPI();
+    var userB = userAPI();
+    users.push(userA);
+    users.push(userB);
+    userA.expectGameCreated().createGame().then(()=> {
             userB.expectGameJoined().joinGame(userA.getGame().gameId).then(function () {
                 userA.expectMoveMade().placeMove(0, 0).then(()=> {
                     userA.expectMoveMade();
@@ -50,20 +69,26 @@ describe('User Tictactoe load test', function(){
                             userB.expectMoveMade().placeMove(0, 2).then(()=> {
                                 userB.expectMoveMade(); // By other user
                                 userA.expectMoveMade().placeMove(2, 2)
-                                    .expectGameWon().then(done); // Winning move
+                                  .expectGameWon().then(function() {
+                                  for(var i = 0; i < users.count; i++) {
+                                    users[i].disconnect();
+                                    users[i].pop()
+                                  }
+                                  var endMillis = new Date().getTime();
+                                  var duration = endMillis - startMillis;
+
+                                  if(duration > timelimit){
+                                      done.fail(duration + " exceeds limit " + timelimit);
+                                  } else {
+                                      done();
+                                  }
+                                });
                             })
                         })
                     });
                 })
             })
-      })
-    }
-    var endMillis = new Date().getTime();
-    var duration = endMillis - startMillis;
-    if(duration > timelimit){
-        done.fail(duration + " exceeds limit " + timelimit);
-    } else {
-        done();
-    }
+        }
+    );
   })
 });
