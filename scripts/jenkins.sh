@@ -1,4 +1,4 @@
-#Clear possible changes and reinstall the application
+#Clear possible changes and reinstall dependencies
 
 #Remove old containers if there are any
 docker rm -f $(docker ps -qa)
