@@ -80,6 +80,7 @@ describe('User Tictactoe load test', function(){
                                   if(duration > timelimit){
                                       done.fail(duration + " exceeds limit " + timelimit);
                                   } else {
+                                      console.debug(duration);
                                       done();
                                   }
                                 });
