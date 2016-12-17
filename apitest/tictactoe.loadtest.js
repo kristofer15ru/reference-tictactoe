@@ -13,12 +13,12 @@ const testAPI = TestAPI(inject({
     RoutingContext
 }));
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 15000;
 
 describe('User Tictactoe load test', function(){
 
   const count = 100;
-  const timelimit = 25000;
+  const timelimit = 13000;
 
   beforeEach(function (done) {
       var testapi = testAPI();
@@ -30,7 +30,7 @@ describe('User Tictactoe load test', function(){
 
   it('should create and play ' + count + '  games within '+ timelimit +'ms',function(done){
     var startMillis = new Date().getTime();
-    var users = Array(count);
+    var users = [];
     for(var i = 0; i < count; i++) {
       var userA, userB;
       userA = userAPI();
@@ -72,7 +72,6 @@ describe('User Tictactoe load test', function(){
                                   .expectGameWon().then(function() {
                                   for(var i = 0; i < users.count; i++) {
                                     users[i].disconnect();
-                                    users[i].pop()
                                   }
                                   var endMillis = new Date().getTime();
                                   var duration = endMillis - startMillis;
@@ -80,7 +79,6 @@ describe('User Tictactoe load test', function(){
                                   if(duration > timelimit){
                                       done.fail(duration + " exceeds limit " + timelimit);
                                   } else {
-                                      console.debug(duration);
                                       done();
                                   }
                                 });

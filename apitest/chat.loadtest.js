@@ -27,7 +27,7 @@ describe('User chat load test', function(){
     });
 
     const count = 200;
-    const timelimit = 8000;
+    const timelimit = 6500;
 
     it('should connect and send ' + count + '  user messages within '+ timelimit +'ms',function(done){
 
@@ -55,7 +55,6 @@ describe('User chat load test', function(){
                 if(duration > timelimit){
                     done.fail(duration + " exceeds limit " + timelimit);
                 } else {
-                    console.debug(duration);
                     done();
 
                 }
