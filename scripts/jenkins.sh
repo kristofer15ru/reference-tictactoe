@@ -12,4 +12,5 @@ rm -rf ./client/node_modules
 git clean -dfx
 git stash
 
+#Install dependencies
 ./Makefile

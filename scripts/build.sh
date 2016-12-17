@@ -1,4 +1,4 @@
-#Build the code
+#Build the project
 #note: npm must be installed already. See Makefile
 
 #Get git variables
