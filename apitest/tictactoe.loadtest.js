@@ -18,7 +18,7 @@ jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
 describe('User Tictactoe load test', function(){
 
   const count = 100;
-  const timelimit = 20000;
+  const timelimit = 25000;
 
   beforeEach(function (done) {
       var testapi = testAPI();
