@@ -1,5 +1,5 @@
 {
-"development": {
+"dev": {
     "driver": "pg",
     "user": "postgres",
     "password": "mysecretpassword",

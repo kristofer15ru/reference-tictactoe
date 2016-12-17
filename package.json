@@ -33,7 +33,7 @@
     "startclient": "cd ./client && npm run start",
     "buildclient": "cd ./client && npm run build",
     "clean": "if [ -d ./build ]; then rm -r ./build; fi",
-    "start": "export NODE_PATH=. && npm run migratedb-dev && nodemon run.js",
+    "start": "export NODE_PATH=. && npm run migratedb && nodemon run.js",
     "createbuild": "[ -d build ] || mkdir build ",
     "build": "export NODE_PATH=. && npm run clean && npm run createbuild && npm run buildclient && mv client/build build/static && cp -R server build/server && mkdir -p build/client/src && cp -r client/src/common build/client/src && cp run.js build",
     "test": "export NODE_PATH=. && nodemon ./node_modules/.bin/jasmine JASMINE_CONFIG_PATH=./jasmine.json",
@@ -41,7 +41,7 @@
     "loadtest": "export NODE_PATH=. && ./node_modules/.bin/jasmine JASMINE_CONFIG_PATH=./jasmine-loadtest.json",
     "test-xml": "export NODE_PATH=. && ./node_modules/.bin/jasmine JASMINE_CONFIG_PATH=./jasmine-xml.json",
     "dev": "./node_modules/.bin/parallelshell 'npm run start' 'npm run startclient'",
-    "migratedb-dev": "db-migrate --config ./server/database.json --migrations-dir ./server/migrations up -e development",
+    "migratedb": "db-migrate --config ./server/database.json --migrations-dir ./server/migrations up",
     "migratedb-prod": "db-migrate --config ./server/database.json --migrations-dir ./server/migrations up -e production",
     "startdockerdb": "docker run -p 5432:5432 --name pg2 -e POSTGRES_PASSWORD=mysecretpassword -d postgres",
     "connectdockerdb": "docker run -it --rm --link pg3:postgres postgres psql -h postgres -U postgres"
