@@ -72,6 +72,13 @@ it('should ignore move with matching gameId but not coordinates',function(){
 });
 
 it('should ignore move with matching coordinates, but not matching gameId',function(){
+  cmd.gameId = "a different game";
+  eventRouter.routeMessage(cmd);
+  //Verify that this cell is capable of noting basic data
+  expect(component.state('gameId')).not.toBe(cmd.gameId);
+  expect(component.state('location')).toBe(cmd.location);
+  //Since the commands gameId was changed, the cell should ingore the event since it does not apply to it
+  expect(component.state('symbol')).toBe('');
 });
 
 it('should issue PlaceMove command with gameId, mySide and coordinates when clicked', ()=>{
