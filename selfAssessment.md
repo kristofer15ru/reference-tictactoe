@@ -1,7 +1,5 @@
 
 ## Scripts
-
-Outline what script files you created and the purpose of each file. Each file should be commented. This could be
 - Make
   - Name: Makefile
   - Purpose: Installs npm in the project root and client. This should install node_modules and cover required dependencies. These operations are vital for running the code properly.
@@ -36,9 +34,6 @@ Outline what script files you created and the purpose of each file. Each file sh
   - Not implemented
 
 ## Testing & logic
-
-Outline what tests you created.
-
 - UnitTests, server logic TDD (Git commit log)
   - Implemented tests:
     - should emit FullGameJoinAttempted event when game full
@@ -69,16 +64,11 @@ Outline what tests you created.
   - Yes. Information about which symbol you are playing and the game end results have not been implemented yet but symbols can be placed and server side logic successfully limits it to legal behaviour.
 
 ## Data migration
-
-Did you create a data migration.
-
 - Migration up and down
-  - Yes. A "[dateOfCreation]addEventCol.log" file has been added to "[project root]/server/migrations/". It is used to add a column to the eventlog table. The down function is not expected to be needed since the table already has a down function that drops it entirely.
+  - A data migration was created. A "[dateOfCreation]addEventCol.log" file has been added to "[project root]/server/migrations/". It is used to add a column to the eventlog table. The down function is not expected to be needed since the table already has a down function that drops it entirely.
 
 
 ## Jenkins
-
-Do you have the following Jobs and what happens in each Job:
 - Implemented Jenkins stages:
   - CommitStage
     - URL: http://82.221.49.96:8080/job/kristofer15-tictactoe-CommitStage/
@@ -94,8 +84,7 @@ Do you have the following Jobs and what happens in each Job:
     - Purpose: Pull any changes made to the project if the AcceptanceStage was successful, clean any previous change made to it and reinstall dependencies. Use the fresh code to perform load tests by repeating the API test rapidly against the website.
 
 
-Did you use any of the following features in Jenkins?
-
+## Additional Jenkins features
 - Schedule or commit hooks
   - A hook was made so that the CommitStage is performed any time a change is pushed to Github. Leads to running all stages if they are successful.
 
@@ -110,12 +99,9 @@ Did you use any of the following features in Jenkins?
 
 
 ## Monitoring
-
-Did you do any monitoring?
-- No
-
+- No monitoring was implemented
 
 ## Other
 
-### Anything else you did to improve you deployment pipeline of the project itself?
+### Possible improvements
 If I had more time I would complete UI testing, which I expect to do just past the hand-in time. After that I would create the provisioning script and use it to improve the seperation and sanitation of Jenkins stages. After that I would improve TictactoeGame.js that was provided as it does not seem to behave as intended and I would attempt to implement monitoring
