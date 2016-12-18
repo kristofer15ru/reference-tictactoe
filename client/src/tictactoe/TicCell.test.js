@@ -53,15 +53,22 @@ it('should render without error', function () {
 it('should record move with matching game id and coordinates ',function(){
   //Route moveplaced command directly to eventRouter
   eventRouter.routeMessage(cmd);
-  //Expect this cell to hold some basic data
+  //Verify that this cell is capable of noting basic data
   expect(component.state('gameId')).toBe(cmd.gameId);
   expect(component.state('location')).toBe(cmd.location);
   //Main test. verify that the cell has stored the symbol placement.
   //Verifies that the cell noticed the routed event
   expect(component.state('symbol')).toBe(cmd.side);
 });
-/*
+
 it('should ignore move with matching gameId but not coordinates',function(){
+  cmd.location = 5;
+  eventRouter.routeMessage(cmd);
+  //Verify that this cell is capable of noting basic data
+  expect(component.state('gameId')).toBe(cmd.gameId);
+  expect(component.state('location')).toBe(4);
+  //Since the command location was changed, the cell should ignore the event since it does not apply to it
+  expect(component.state('symbol')).not.toBe(-1);
 });
 
 it('should ignore move with matching coordinates, but not matching gameId',function(){
@@ -72,6 +79,5 @@ it('should issue PlaceMove command with gameId, mySide and coordinates when clic
 
   //check whether correct command was dispatched through command router
 });
-*/
 
 });
