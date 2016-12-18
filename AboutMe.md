@@ -8,7 +8,7 @@ Garðabær
 
 ###Education and employment history:
 I'm finishing my third semester working on a BSc in computer science at Reykjavík University
-I have worked for companies including Landsspítalinn university hospital & Sagafilm
+I have worked for companies including Landspítalinn university hospital & Sagafilm
 
 ###What kind of software person am I:
 Windows going on Ubuntu
