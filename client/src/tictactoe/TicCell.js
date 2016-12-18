@@ -19,7 +19,7 @@ export default function (injected) {
           this.setState({ gameId: this.props.gameId})
           this.setState({ location: location})
           const movePlaced = (movePlaced)=>{
-                if(movePlaced.location == this.state.location) {
+                if(movePlaced.location == this.state.location && movePlaced.gameId == this.state.gameId) {
                   this.setState({ symbol: movePlaced.side});
                 }
           };
