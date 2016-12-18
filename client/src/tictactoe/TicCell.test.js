@@ -53,12 +53,12 @@ it('should render without error', function () {
 it('should record move with matching game id and coordinates ',function(){
   //Route moveplaced command directly to eventRouter
   eventRouter.routeMessage(cmd);
-  //Expect this cell to have seen the event and remembered the appropriate data
-  expect(component.state('gameId')).toBe(cmd.gameId)
-  expect(component.state('location')).toBe(cmd.location)
-  //console.debug(component.state('symbol'))
-  //commandRouter.routeMessage(cmd);
-
+  //Expect this cell to hold some basic data
+  expect(component.state('gameId')).toBe(cmd.gameId);
+  expect(component.state('location')).toBe(cmd.location);
+  //Main test. verify that the cell has stored the symbol placement.
+  //Verifies that the cell noticed the routed event
+  expect(component.state('symbol')).toBe(cmd.side);
 });
 /*
 it('should ignore move with matching gameId but not coordinates',function(){
