@@ -43,8 +43,21 @@ module.exports = function(injected){
                         }]);
                     },
                     "PlaceMove": function(cmd){
+                      // Check if the game has already been won
+                      // Stops moves after win
+                      if(gameState.gameWon()) {
+                        eventHandler( [{
+                          gameId: cmd.gameId,
+                          type: "IllegalMoveAttempt",
+                          user: cmd.user,
+                          name: cmd.name,
+                          timeStamp: cmd.timeStamp,
+                          location: cmd.location,
+                          side: cmd.side
+                        }])
+                        return;
+                      }
 
-                      // Check here for conditions which prevent command from altering state
                       if(gameState.notYourMove(cmd.side)) {
                         eventHandler( [{
                           gameId: cmd.gameId,

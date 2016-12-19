@@ -33,6 +33,10 @@ module.exports = function (injected) {
               move = 'X';
             }
           }
+          //Enables unit testing on given GameWon. Also secures wins
+          if(event.type=="GameWon") {
+            won = true;
+          }
 	      }
 
         function processEvents(history) {
@@ -94,6 +98,10 @@ module.exports = function (injected) {
           return won;
         }
 
+        function gameWon() {
+          return won;
+        }
+
         function noMovesLeft() {
           return (moveCount == 9)
         }
@@ -101,6 +109,7 @@ module.exports = function (injected) {
         processEvents(history);
 
         return {
+          gameWon:gameWon,
           noMovesLeft:noMovesLeft,
           winningMove:winningMove,
           notYourMove:notYourMove,

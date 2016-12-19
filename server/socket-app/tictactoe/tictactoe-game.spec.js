@@ -875,4 +875,36 @@ describe('Place move command', function () {
           }
       ];
     })
+    it('should emit IllegalMove on PlaceMove after game is won', function(){
+
+        given = [{
+          type: "GameWon",
+          user: {
+            userName: "Gulli"
+          },
+          name: "TheFirstGame",
+          timeStamp: "2014-12-02T11:29:29"
+        }];
+        when =
+        {
+            type: "PlaceMove",
+            user: {
+              userName: "TheGuy"
+            },
+            name: "TheFirstGame",
+            side: 'X',
+            timeStamp: "2014-12-02T11:29:30"
+        };
+        then = [ {
+          type: "IllegalMoveAttempt",
+          user: {
+            userName: "TheGuy"
+          },
+          name: "TheFirstGame",
+          timeStamp: "2014-12-02T11:29:30",
+          side: 'X'
+        }
+        ]
+    })
+
 });
