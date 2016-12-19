@@ -82,9 +82,10 @@ it('should ignore move with matching coordinates, but not matching gameId',funct
 });
 
 it('should issue PlaceMove command with gameId, mySide and coordinates when clicked', ()=>{
+  //Simulate click event
   component.find('div').simulate('click');
-
-  //check whether correct command was dispatched through command router
+  //Verify that the PlaceMove command was recieved
+  expect(commandsReceived.pop().type).toBe("PlaceMove");
 });
 
 });
