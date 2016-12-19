@@ -3,6 +3,7 @@
 - Make
   - Name: Makefile
   - Purpose: Installs npm in the project root and client. This should install node_modules and cover required dependencies. These operations are vital for running the code properly.
+  - Note: Shouldn't be called Makefile. Rename was scheduled but missed the deadline.
 - Build
   - Name: build.sh
   - Purpose: Clear previous builds and create a new one in [project root]/build/
