@@ -59,7 +59,10 @@
 - UI TDD
   - Implemented tests:
     - should record move with matching game id and coordinates
-    - REST EXPECTED JUST PAST HAND IN TIME
+    - should ignore move with matching gameId but not coordinates
+    - should ignore move with matching coordinates, but not matching gameId
+    - should issue PlaceMove command with gameId, mySide and coordinates when clicked
+    
 - Is the game playable?
   - Yes. Information about which symbol you are playing and the game end results have not been implemented yet but symbols can be placed and server side logic successfully limits it to legal behaviour.
 
