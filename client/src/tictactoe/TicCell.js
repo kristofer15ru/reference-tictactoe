@@ -9,8 +9,8 @@ export default function (injected) {
         constructor() {
             super();
             this.state = {
-              gameId: -1,
-              location: -1,
+              gameId: undefined,
+              location: undefined,
               symbol: ''
             }
         }
