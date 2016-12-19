@@ -68,7 +68,7 @@ it('should ignore move with matching gameId but not coordinates',function(){
   expect(component.state('gameId')).toBe(cmd.gameId);
   expect(component.state('location')).toBe(4);
   //Since the command location was changed, the cell should ignore the event since it does not apply to it
-  expect(component.state('symbol')).not.toBe(-1);
+  expect(component.state('symbol')).toBe('');
 });
 
 it('should ignore move with matching coordinates, but not matching gameId',function(){
