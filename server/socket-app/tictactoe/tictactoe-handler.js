@@ -43,21 +43,6 @@ module.exports = function(injected){
                         }]);
                     },
                     "PlaceMove": function(cmd){
-                      // Check if the game has already been won
-                      // Stops moves after win
-                      if(gameState.gameWon()) {
-                        eventHandler( [{
-                          gameId: cmd.gameId,
-                          type: "IllegalMoveAttempt",
-                          user: cmd.user,
-                          name: cmd.name,
-                          timeStamp: cmd.timeStamp,
-                          location: cmd.location,
-                          side: cmd.side
-                        }])
-                        return;
-                      }
-
                       if(gameState.notYourMove(cmd.side)) {
                         eventHandler( [{
                           gameId: cmd.gameId,
@@ -69,7 +54,7 @@ module.exports = function(injected){
                         }])
                         return
                       }
-                      if(gameState.outOfBounds(cmd.location)) {
+                      if(gameState.outOfBounds(cmd.location) ||  gameState.gameWon() || gameState.gridOccupied(cmd.location)) {
                         eventHandler( [{
                           gameId: cmd.gameId,
                           type: "IllegalMoveAttempt",
@@ -79,18 +64,6 @@ module.exports = function(injected){
                           location: cmd.location,
                           side: cmd.side
                         }])
-                        return
-                      }
-                      if(gameState.gridOccupied(cmd.location)) {
-                        eventHandler( [{
-                          gameId: cmd.gameId,
-                          type: "IllegalMoveAttempt",
-                          user: cmd.user,
-                          name: cmd.name,
-                          timeStamp: cmd.timeStamp,
-                          location: cmd.location,
-                          side: cmd.side
-                        }]);
                         return
                       }
 
