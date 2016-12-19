@@ -1,5 +1,8 @@
 import React from 'react';
 
+const imgX = require('./X.png');
+const imgO = require('./O.png');
+
 export default function (injected) {
     const eventRouter = injected('eventRouter');
     const commandPort = injected('commandPort');
@@ -30,9 +33,15 @@ export default function (injected) {
         }
 
         render() {
-            //console.debug(this)
+            var image=undefined;
+            if(this.state.symbol == 'X') {
+              image=<img src={imgX} alt='X'/>
+            }
+            else if(this.state.symbol == 'O') {
+              image=<img src={imgO} alt='O'/>
+            }
             return <div className="ticcell" onClick={() => this.placeMove(this)} >
-                {this.state.symbol}
+                {image}
             </div>
         }
 
